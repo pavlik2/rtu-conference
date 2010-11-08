@@ -1,5 +1,7 @@
 package conf.server;
 
+import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -10,6 +12,9 @@ import conf.shared.FieldVerifier;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import  com.google.appengine.api.datastore.Text;
+
+
+
 /**
  * The server side implementation of the RPC service.
  */
@@ -19,7 +24,7 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 
 	public Boolean greetServer(String input,String i1,String i2,String i3) throws IllegalArgumentException {
 		
-		
+	
 		 PersistenceManager pm = PMF.get().getPersistenceManager();
 		 
 Text t = new Text("");
@@ -52,28 +57,40 @@ Text t = new Text("");
 				*/
 	}
 	
-	public String[] ret () {
+	public ArrayList<String> ret () {
 		 PersistenceManager pm = PMF.get().getPersistenceManager();
-		 Query query = pm.newQuery("select from Raksts");
-	//	 query.
-		String[] a = new String[4];
+		// Query query = pm.newQuery("SELECT  FROM Raksts");
+		 Query query = pm.newQuery(Raksts.class);
+		 ArrayList<String> result = new ArrayList<String>();
+		 
+		//String[] a = new String[4];
+		 
 		 try {
-		        List<Raksts> results = (List<Raksts>) query.execute();
+		       // List<Raksts>
+			 List<Raksts>  results = (List<Raksts>) query.execute();
+
+		        	       
+			 
 		        if (results.iterator().hasNext()) {
+		        	System.out.println("next ok");
 		            for (Raksts e : results) {
-		                a[0] = new String(e.getNosaukums());
-		                a[1] = new String(e.getAutori());
-		                a[2] = new String (e.getA_dati());
-		                a[3] = new String (e.getAnnotacija());
-		                
-		            }
-		        } else {
+		            	
+		            	
+		              result.add(e.getNosaukums()); 
+		              result.add(e.getA_dati());
+		              //  a[1] = new String(e.getAutori());
+		              //  a[2] = new String (e.getA_dati());
+		              //  a[3] = new String (e.getAnnotacija());
+	 }    }	            
+		           
+		        else {
 		            // ... no results ...
-		        }
+		        }    
+		        
 		    } finally {
 		        query.closeAll();
 		    }
-		return a;
+		return result;
 		    
 		
 	};
