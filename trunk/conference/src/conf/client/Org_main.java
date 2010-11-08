@@ -1,5 +1,8 @@
 package conf.client;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -27,13 +30,19 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOutEvent;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.SimpleEventBus;
+
+import conf.server.Raksts;
 
 public class Org_main extends Composite {
-	/*
+	
 	private final GreetingServiceAsync greetingService = GWT
 	.create(GreetingService.class);
-//	private String[] b;
-	*/
+//	private String[] b; 
+	
+	
+	
 	public Org_main() {
 	//	b = new String[4];
 		HorizontalPanel horizontalPanel = new HorizontalPanel();
@@ -141,55 +150,67 @@ public class Org_main extends Composite {
 		
 		
 	//	final String[] a = new String[4] ;
-	/*	
-		 greetingService.ret(new AsyncCallback<String[]>() {
+	
+		 greetingService.ret(new AsyncCallback<ArrayList<String>>() {
 			
 			public void onFailure(Throwable caught) {
+				
 			}
 
 			//public static String[] b = new String[4];
 @Override
-public void onSuccess(String[] result) {
-	 b = result;
+public void onSuccess(ArrayList<String> result) {
+	int numRows = flexTable.getRowCount();
 	// TODO Auto-generated method stub
+	int m = result.size();
+
+	//String aa = result.get(1);
+//	 if (result.iterator().hasNext()) {
+//         for (String e : result) {
+        	// String[] b = new String[] {"a","b","c","d"};
+	
+     		Label label = new Label("Raksta nosaukums");
+     		flexTable.setWidget(numRows, 0, new Label(Integer.toString(m)));
+     		
+     		Label label_1 = new Label("");
+     		flexTable.setWidget(numRows, 1, label_1);
+     		
+     		Label lblIr = new Label("IR");
+     		lblIr.setStyleName("serverResponseLabelError");
+     		flexTable.setWidget(numRows, 2, lblIr);
+     		
+     		Label label_2 = new Label("1.rec.");
+     		flexTable.setWidget(numRows, 3, label_2);
+     		
+     		Label label_3 = new Label("2.rec");
+     		flexTable.setWidget(numRows, 4, label_3);
+     		
+     		PushButton pushButton = new PushButton("New button");
+     		flexTable.setWidget(numRows, 5, pushButton);
+     		
+     		ToggleButton toggleButton = new ToggleButton("Up text");
+     		flexTable.setWidget(numRows, 6, toggleButton);
+     		
+     		Label label_4 = new Label("");
+     		flexTable.setWidget(numRows, 7, label_4);
+     		
+     		Label label_5 = new Label("");
+     		flexTable.setWidget(numRows, 8, label_5);
+     		flexTable.getCellFormatter().setHorizontalAlignment(0, 7, HasHorizontalAlignment.ALIGN_LEFT);
+     		
+     		Button btnSkatit = new Button("Skatit");
+     		flexTable.setWidget(numRows, 9, btnSkatit);
+     		flexTable.setStylePrimaryName("new");
+//  }    }	            
+        
+   //  else {         // ... no results ...      }
+	
 }
 
 		}
-		);*/
+		);
 		
-	String[] b = new String[] {"a","b","c","d"};
-		Label label = new Label("Raksta nosaukums");
-		flexTable.setWidget(1, 0, new Label(b[0]));
-		
-		Label label_1 = new Label(b[1]);
-		flexTable.setWidget(1, 1, label_1);
-		
-		Label lblIr = new Label("IR");
-		lblIr.setStyleName("serverResponseLabelError");
-		flexTable.setWidget(1, 2, lblIr);
-		
-		Label label_2 = new Label("1.rec.");
-		flexTable.setWidget(1, 3, label_2);
-		
-		Label label_3 = new Label("2.rec");
-		flexTable.setWidget(1, 4, label_3);
-		
-		PushButton pushButton = new PushButton("New button");
-		flexTable.setWidget(1, 5, pushButton);
-		
-		ToggleButton toggleButton = new ToggleButton("Up text");
-		flexTable.setWidget(1, 6, toggleButton);
-		
-		Label label_4 = new Label(b[2]);
-		flexTable.setWidget(1, 7, label_4);
-		
-		Label label_5 = new Label(b[3]);
-		flexTable.setWidget(1, 8, label_5);
-		flexTable.getCellFormatter().setHorizontalAlignment(0, 7, HasHorizontalAlignment.ALIGN_LEFT);
-		
-		Button btnSkatit = new Button("Skatit");
-		flexTable.setWidget(1, 9, btnSkatit);
-		flexTable.setStylePrimaryName("new");
+	
 		
 	
 }

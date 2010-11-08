@@ -3,7 +3,11 @@ package conf.client;
 import conf.client.GreetingService;
 import conf.client.GreetingServiceAsync;
 import conf.shared.FieldVerifier;
-
+import conf.shared.Proxy2;
+import conf.shared.RakstsRequest;
+import conf.shared.RakstsRequestf;
+import com.google.gwt.requestfactory.shared.Request;
+import com.google.gwt.requestfactory.shared.Receiver;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.TextBox;
@@ -16,6 +20,8 @@ import com.google.gwt.user.client.ui.FileUpload;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.user.client.ui.SimpleCheckBox;
 import com.google.gwt.user.client.ui.DisclosurePanel;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -26,6 +32,7 @@ public class Register extends DialogBox {
 	private final GreetingServiceAsync greetingService = GWT
 	.create(GreetingService.class);
 	
+	//requestFactory.initialize(eventBus);
 	public Register() {
 		super(true);
 		setText("Register");
@@ -67,39 +74,45 @@ public class Register extends DialogBox {
 		button.addClickHandler(new ClickHandler() {
 			private void sendNameToServer() {
 				// First, we validate the input.
-			//	errorLabel.setText("");
-			//	String textToServer = textBox.getText();
-		//		if (!FieldVerifier.isValidName(textToServer)) {
-		//			errorLabel.setText("Please enter at least four characters");
-		//			return;
-		//		}
+			
 
 				// Then, we send the input to the server.
 				button.setEnabled(false);
-			//	textToServerLabel.setText(textToServer);
-			//	serverResponseLabel.setText("");
+			
+				/*
+				final EventBus eventBus = new SimpleEventBus();
+				RakstsRequestf requestFactory = GWT.create(RakstsRequestf.class);
+				requestFactory.initialize(eventBus);
+				
+				RakstsRequest request = requestFactory.rakstsRequest();
+				Proxy2 rp = request.create(Proxy2.class);
+				rp.setNosaukums(textBox.getText());
+				rp.setAutori(textBox_2.getText());
+				rp.setAnnotacija(textArea.getText());
+				rp.setA_dati(textBox_1.getText());
+				
+				Request<Void> createReq = request.persist().using(rp);
+				createReq.fire();
+				/*
+				createReq.fire(new Receiver<Void>()
+				{
+				  @Override
+				    public void onSuccess(Void arg0)
+				    {
+				        // Update display
+				    }
+
+			
+				}); */
+				
 				greetingService.greetServer(textBox.getText(),
 						textBox_1.getText(), textBox_2.getText(), textArea.getText(), new AsyncCallback<Boolean>() {
 							public void onFailure(Throwable caught) {
 								// Show the RPC error message to the user
 								
-						//		dialogBox
-						//				.setText("Remote Procedure Call - Failure");
-						//		serverResponseLabel
-						//				.addStyleName("serverResponseLabelError");
-						//		serverResponseLabel.setHTML(SERVER_ERROR);
-							//	dialogBox.center();
-							//	closeButton.setFocus(true);
+								
 							}
-/*
-							public void onSuccess(String result) {
-								dialogBox.setText("Remote Procedure Call");
-								serverResponseLabel
-										.removeStyleName("serverResponseLabelError");
-								serverResponseLabel.setHTML(result);
-								dialogBox.center();
-								closeButton.setFocus(true);
-							} */
+
 
 							@Override
 							public void onSuccess(Boolean result) {
