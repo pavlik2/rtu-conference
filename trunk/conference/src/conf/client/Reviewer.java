@@ -8,31 +8,60 @@ import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
 
 public class Reviewer extends Composite {
-
+final boolean change = false;
 	public Reviewer() {
-		
+		final AbsolutePanel absolutePanel_1 = new AbsolutePanel();
 		AbsolutePanel absolutePanel = new AbsolutePanel();
 		initWidget(absolutePanel);
-		absolutePanel.setSize("505px", "314px");
+		absolutePanel.setSize("689px", "477px");
 		
 		VerticalPanel horizontalPanel = new VerticalPanel();
 		absolutePanel.add(horizontalPanel, 10, 10);
 		horizontalPanel.setSize("139px", "124px");
 		
-		Button button_1 = new Button("New button");
-		horizontalPanel.add(button_1);
+		Button btnPersonigaInformcija = new Button("Personiga info");
+		btnPersonigaInformcija.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				RW1 r1 = new RW1();
+				absolutePanel_1.clear();
+				absolutePanel_1.add(r1);
+			}
+		});
+		horizontalPanel.add(btnPersonigaInformcija);
+		btnPersonigaInformcija.setWidth("142px");
 		
-		Button button = new Button("New button");
-		horizontalPanel.add(button);
+		Button btnRecenzet = new Button("Recenzet");
+		btnRecenzet.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				RW2 r2 = new RW2(); 
+				absolutePanel_1.clear();
+				absolutePanel_1.add(r2);
+			}
+		});
+		horizontalPanel.add(btnRecenzet);
+		btnRecenzet.setWidth("142px");
 		
-		Button button_2 = new Button("New button");
-		horizontalPanel.add(button_2);
+		Button btnIziet = new Button("Iziet");
+		btnIziet.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+			final RootPanel	rp;// = new RootPanel();
+			rp = RootPanel.get(); //Conference c = new Conference();
+			rp.clear(); 
+			//rp.add(c);
+			}
+		});
 		
-		AbsolutePanel absolutePanel_1 = new AbsolutePanel();
+		horizontalPanel.add(btnIziet);
+		btnIziet.setWidth("141px");
+		
+		//AbsolutePanel absolutePanel_1 = new AbsolutePanel();
 		absolutePanel.add(absolutePanel_1, 167, 10);
-		absolutePanel_1.setSize("328px", "266px");
+		absolutePanel_1.setSize("512px", "457px");
 	}
 }
