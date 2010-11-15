@@ -1,24 +1,45 @@
 package conf.client;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Widget;
-import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.DecoratorPanel;
+import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.ui.FlexTable;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.event.logical.shared.AttachEvent;
 
 public class RW2 extends Composite {
 
-	private static final Binder binder = GWT.create(Binder.class);
-
-	interface Binder extends UiBinder<Widget, RW2> {
-	}
-
 	public RW2() {
-		initWidget(binder.createAndBindUi(this));
-	}
-}
+		
+		HorizontalPanel simplePanel = new HorizontalPanel();
+		initWidget(simplePanel);
+		
+	//	AbsolutePanel absolutePanel = new AbsolutePanel();
+		//simplePanel.setWidget(absolutePanel);
+	//	absolutePanel.setSize("567px", "100%");
+		
+		Button btnRecenzet = new Button("Recenzet");
+		btnRecenzet.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				Recenzijas_forma f1 = new Recenzijas_forma();
+				f1.setGlassEnabled(true);
+				f1.center();
+			}
+		});
+		simplePanel.add(btnRecenzet);
+		btnRecenzet.setSize("100px", "28px");
+		
+		FlexTable flexTable = new FlexTable();
+	//	absolutePanel.add(flexTable, 10, 10);
+	///	flexTable.setSize("324px", "280px");
+	//	flexTable.setWidget(0, 0, new Label("N"));
+	/*	flexTable.setWidget(0, 1, new Label("Autors"));
+		flexTable.setWidget(0, 2, new Label("Nosaukums"));
+		flexTable.setWidget(0, 3, new Label("Raksts"));
+		flexTable.setWidget(0, 4, new Label("Tezes"));
+	*/
+}}

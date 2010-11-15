@@ -64,10 +64,23 @@ public class Org_main extends Composite {
 		Label lblRaksti = new Label("Raksti");
 		absolutePanel.add(lblRaksti, 10, 10);
 		
-		Label lblRecenzenti = new Label("Recenzenti");
+		Label lblRecenzenti = new Label("Informacija");
 		
-		decoratedStackPanel.add(lblRecenzenti, "Recenzentu info", false);
+		decoratedStackPanel.add(lblRecenzenti, "Profila info", false);
 		lblRecenzenti.setSize("100%", "34px");
+		
+		AbsolutePanel absolutePanel_1 = new AbsolutePanel();
+		decoratedStackPanel.add(absolutePanel_1, "New widget", false);
+		absolutePanel_1.setSize("100%", "100%");
+		
+		Button btnRecenzenti = new Button("Recenzenti");
+		
+		absolutePanel_1.add(btnRecenzenti, 0, 10);
+		btnRecenzenti.setSize("100px", "28px");
+		
+		Button btnPievienotRecenzentu = new Button("Pievienot recenzentu");
+		absolutePanel_1.add(btnPievienotRecenzentu, 0, 44);
+		btnPievienotRecenzentu.setSize("100px", "28px");
 		
 		Label lblTermini = new Label("Termini");
 		
@@ -81,7 +94,7 @@ public class Org_main extends Composite {
 		lblRecenzenti.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				horizontalPanel_2.clear();
-				Org_rec or = new Org_rec();
+				RW1 or = new RW1();
 				horizontalPanel_2.add(or);
 				
 			}
@@ -92,6 +105,14 @@ public class Org_main extends Composite {
 				horizontalPanel_2.clear();
 				Organizator oo = new Organizator();
 				horizontalPanel_2.add(oo);
+			}
+		});
+		
+		btnRecenzenti.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				horizontalPanel_2.clear();
+				Org_rec or = new Org_rec();
+				horizontalPanel_2.add(or);
 			}
 		});
 		
